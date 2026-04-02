@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MnemoPay — Watch an AI Agent Develop Economic Judgment</title>
+  <meta name="description" content="Interactive demo: an AI agent learns which freelancers deliver and which don't, using MnemoPay's memory-payment feedback loop.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <h1>MnemoPay</h1>
+      <p>Give any AI agent memory and a wallet in 5 lines</p>
+      <div class="tagline">Watch the feedback loop in action. Hire freelancers. The agent learns from outcomes.</div>
+    </header>
+
+    <!-- Task Card -->
+    <div class="task-card">
+      <div class="round-label" id="round-label">Round 1 of 10</div>
+      <div class="task-name" id="task-name">Build a landing page</div>
+      <div class="task-budget" id="task-budget">Budget: $200</div>
+    </div>
+
+    <!-- Freelancer Cards -->
+    <div class="freelancers" id="freelancers"></div>
+
+    <!-- Let Agent Decide -->
+    <div class="agent-decide-row">
+      <button class="btn-agent-decide" id="agent-decide">Let Agent Decide (uses memory)</button>
+    </div>
+
+    <!-- Outcome Card -->
+    <div class="outcome-card" id="outcome-card"></div>
+
+    <!-- Game Over -->
+    <div class="game-over" id="game-over">
+      <h2>10 Rounds Complete</h2>
+      <p id="game-over-msg"></p>
+    </div>
+
+    <!-- Two-panel layout -->
+    <div class="panels">
+      <div class="panel" id="decision-log">
+        <h2>Decision Log</h2>
+        <div class="empty-state">Decisions will appear here as you hire freelancers.</div>
+      </div>
+      <div class="panel" id="memory-panel">
+        <h2>Agent Memory (Live)</h2>
+        <div class="empty-state">No memories yet. Pick a freelancer to start.</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-box">
+        <div class="number" id="rep-score">0.50</div>
+        <div class="label">Reputation</div>
+      </div>
+      <div class="stat-box">
+        <div class="number green" id="wallet-balance">$0</div>
+        <div class="label">Wallet</div>
+      </div>
+      <div class="stat-box">
+        <div class="number" id="mem-count">0</div>
+        <div class="label">Memories</div>
+      </div>
+      <div class="stat-box">
+        <div class="number" id="success-rate">&mdash;</div>
+        <div class="label">Success Rate</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="btn" id="btn-reset">Reset Agent</button>
+      <button class="btn primary" id="btn-code">View Code — npm install @mnemopay/sdk</button>
+    </div>
+
+    <!-- Code Modal -->
+    <div class="modal-overlay" id="code-modal">
+      <div class="modal">
+        <h3>5 lines. That's it.</h3>
+        <pre><code>import { MnemoPay } from "@mnemopay/sdk";
+
+const agent = MnemoPay.quick("agent-001");
+await agent.remember("User prefers TypeScript");
+const memories = await agent.recall();
+const tx = await agent.charge(5.00, "Built analytics dashboard");
+await agent.settle(tx.id);
+// ^ memories accessed in the last hour get +0.05 importance</code></pre>
+        <div class="install-cmd">$ npm install @mnemopay/sdk</div>
+        <div class="links">
+          <a href="https://github.com/t49qnsx7qt-kpanks/mnemopay-sdk" target="_blank">GitHub</a>
+          <a href="https://www.npmjs.com/package/@mnemopay/sdk" target="_blank">npm</a>
+        </div>
+        <button class="btn close-btn" id="close-modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="demo.js"></script>
+</body>
+</html>
